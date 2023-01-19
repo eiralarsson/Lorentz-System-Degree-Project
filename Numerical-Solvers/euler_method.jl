@@ -1,1 +1,4 @@
-println("Hello World")
+include("lorentz_system.jl")
+
+## intial values
+
