@@ -15,9 +15,10 @@ function DTM(p, x̄, terms::Int64,Δt)
 
     x̄ = zeros(3)
     for i=1:terms
-        x̄[1] = x̄[1] + C[1,i]*Δt^(i-1)
-        x̄[2] = x̄[2] + C[2,i]*Δt^(i-1)
-        x̄[3] = x̄[3] + C[3,i]*Δt^(i-1)
+        # I honestly don't know why it works to use 2*Δt instead of Δt, but it does
+        x̄[1] = x̄[1] + C[1,i]*(2*Δt)^(i-1)
+        x̄[2] = x̄[2] + C[2,i]*(2*Δt)^(i-1)
+        x̄[3] = x̄[3] + C[3,i]*(2*Δt)^(i-1)
     end
 
     return x̄
