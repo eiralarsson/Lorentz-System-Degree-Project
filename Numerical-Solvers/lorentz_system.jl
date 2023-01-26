@@ -1,4 +1,4 @@
-function LorentzSystem(p,x̄)
+function LorentzSystem(x̄,p,t=1)
     # Lorentz system
     # Returns the derivative of the state vector x̄
     θ=p[1]; μ=p[2]; β=p[3]

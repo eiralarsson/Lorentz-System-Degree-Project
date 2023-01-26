@@ -1,9 +1,9 @@
 function RK4(ẋ::Function, p, xₙ, Δt)
 
-    k₁ = ẋ(p, xₙ)
-    k₂ = ẋ(p, xₙ + 0.5*Δt*k₁)
-    k₃ = ẋ(p, xₙ + 0.5*Δt*k₂)
-    k₄ = ẋ(p, xₙ + Δt*k₃)
+    k₁ = ẋ(xₙ,p)
+    k₂ = ẋ(xₙ + 0.5*Δt*k₁,p)
+    k₃ = ẋ(xₙ + 0.5*Δt*k₂,p)
+    k₄ = ẋ(xₙ + Δt*k₃,p)
 
     xₙ₊₁ = xₙ + 1/6*Δt*(k₁ + 2*k₂ + 2*k₃ + k₄)
 
