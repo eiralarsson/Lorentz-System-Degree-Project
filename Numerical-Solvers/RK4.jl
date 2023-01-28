@@ -1,4 +1,6 @@
-function RK4(ẋ::Function, p, xₙ, Δt)
+include("lorentz_system.jl")
+
+function RK4(p, xₙ, Δt,ẋ=LorentzSystem::Function)
 
     k₁ = ẋ(xₙ,p)
     k₂ = ẋ(xₙ + 0.5*Δt*k₁,p)

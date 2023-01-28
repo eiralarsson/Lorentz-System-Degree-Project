@@ -3,7 +3,7 @@ using Plots
 
 # Implementations of the differential transformation method (DTM) for lorenz system with 10 terms
 # The DTM is a method for solving differential equations with a finite number of terms
-function DTM(p, x̄, terms::Int64=10,Δt)
+function DTM(p,x̄,Δt, terms=10::Int64)
     θ=p[1]; μ=p[2]; β=p[3]
     C = zeros(3, terms)
     C[1,1] = x̄[1]; C[2,1] = x̄[2]; C[3,1] = x̄[3]
