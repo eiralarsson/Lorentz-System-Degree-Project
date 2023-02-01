@@ -1,5 +1,6 @@
 function EulerCromer(x̄ₙ,p,Δt)
     # Euler Cromer for Lorenz system
+    # 
     θ, μ, β = p
     xₙ, yₙ, zₙ = x̄ₙ
 
