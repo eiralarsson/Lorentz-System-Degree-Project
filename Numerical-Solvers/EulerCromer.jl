@@ -1,4 +1,4 @@
-function EulerCromer(x̄ₙ,p,Δt)
+function EulerCromer(p,x̄ₙ,Δt)
     # Euler Cromer for Lorenz system
     # 
     θ, μ, β = p
