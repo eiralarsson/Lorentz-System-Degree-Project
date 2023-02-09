@@ -1,4 +1,4 @@
-function EulerCromer(x̄ₙ,p,Δt)
+function EulerCromer(p,x̄ₙ,Δt)
     # Euler Cromer for Lorenz system
     # 
     θ, μ, β = p
@@ -7,7 +7,7 @@ function EulerCromer(x̄ₙ,p,Δt)
     ẋₙ = θ * (yₙ - xₙ)
     xₙ₊₁ = xₙ + ẋₙ * Δt
     
-    ẏₙ = xₙ₊₁ * (μ - zₙ) - yₙ
+    ẏₙ = xₙ * (μ - zₙ) - yₙ
     yₙ₊₁ =  yₙ + ẏₙ * Δt
 
     żₙ = xₙ₊₁ * yₙ₊₁ - β * zₙ
