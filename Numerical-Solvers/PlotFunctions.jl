@@ -23,3 +23,11 @@ function PlotTrajectoriesInterpolated(solutions)
     end
     display(p)
 end
+
+function PlotTrajectoriesOneVariable(solutions, index, legend=false)
+    p = plot(legend=legend)
+    for X = solutions
+        plot!(p, X[index,:])
+    end
+    display(p)
+end
