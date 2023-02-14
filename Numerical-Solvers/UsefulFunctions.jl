@@ -1,6 +1,6 @@
 using LinearAlgebra
 
-function SolutionLorenz(p, Δt, x₀, N, Solver)
+function SolutionLorenz(p, Δt, N, x₀, Solver)
     X = zeros(3,N+1)
     X[:,1] = x₀
     x = x₀
@@ -23,7 +23,7 @@ end
 
 # Returns the solutions to lorenz with parameters p for all the initial 
 # conditions in 'points' for one of our own solvers.
-function PointsSolutions(p,Δt,N,Solver,initial_points)
+function PointsSolutions(p,Δt,N,initial_points,Solver)
     solutions = []
     M = size(initial_points)[2]
     for i = 1:M
@@ -35,13 +35,13 @@ function PointsSolutions(p,Δt,N,Solver,initial_points)
 end
 
 # Same as above but with solvers from 'DifferentialEquations'
-function PointsSolutionsJuliaSolver(p,Δt,N,Solver,points)
+function PointsSolutionsJuliaSolver(p,Δt,N,initial_points,Solver)
     solutions = []
-    M = size(points)[2]
+    M = size(initial_points)[2]
     for i = 1:M
-        x = points[:,i]
-        prob = ODEProblem(LorentzSystem,x,(0,Δt*N),p)
-        X = solve(prob, Solver(), adaptive=false, dt=Δt)
+        x = initial_points[:,i];
+        prob = ODEProblem(LorentzSystem,x,(0,Δt*N),p);
+        X = solve(prob, Solver(), adaptive=false, dt=Δt);
         push!(solutions, X)
     end
     return solutions
