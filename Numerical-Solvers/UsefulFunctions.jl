@@ -1,12 +1,18 @@
 using LinearAlgebra
 
-function SolutionLorenz(p, Δt, N, x₀, Solver)
+function SolutionLorenz(p, Δt, N::Int64, x₀, Solver)
     X = zeros(3,N+1)
     X[:,1] = x₀
     x = x₀
     for i = 2:N+1
         X[:,i] = Solver(p, X[:,i-1], Δt)
     end
+    return X
+end
+
+function SolutionLorenzJuliaSolver(p, Δt, N::Int64, x₀, Solver)
+    prob = ODEProblem(LorentzSystem,x₀,(0,Δt*N),p);
+    X = solve(prob, Solver(), adaptive=false, dt=Δt);
     return X
 end
 
