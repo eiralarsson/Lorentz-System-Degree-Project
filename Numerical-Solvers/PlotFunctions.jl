@@ -33,9 +33,9 @@ function PlotTrajectoriesOneVariable(solutions, index, legend=false)
     display(p)
 end
 
-function PlotPipPlot(M,Δt;title="Correlation plot",clim=(-1,1),cmap=:grays)
+function PlotPipPlot(M,Δt;title="Correlation plot",clim=(-1,1),cmap=:grays, yaxis=false)
     r,c = size(M)
     y = [1:1:r]
     x = [0:Δt:Δt*(c-1)]
-    heatmap(x,y,M,xlabel="time t", title=title,clim=clim,cmap=cmap,yaxis=false)
+    heatmap(x,y,M,xlabel="time t", title=title,clim=clim,cmap=cmap,yaxis=yaxis)
 end

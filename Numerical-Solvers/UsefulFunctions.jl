@@ -56,3 +56,35 @@ end
 function Correlation(vec1,vec2)
     return sum(vec1.*vec2)/norm(vec1)/norm(vec2)
 end
+
+function CorrelationMatrix(p,N,dt,initial_points,Solvers,ratio)
+    r = ratio
+    M = zeros(length(initial_points), N+1)
+    for i = eachindex(initial_points)
+        x = initial_points[i]
+        X = []
+        for k = 1:2
+            if typeof(Solvers[k]) == UnionAll
+                push!(X,SolutionLorenzJuliaSolver(p, dt/r[k], N*r[k], x, Solvers[k])[1:ratio[k]:end])
+            else
+                push!(X,SolutionLorenz(p, dt/r[k], N*r[k], x, Solvers[k])[:,1:ratio[k]:end])
+            end
+        end
+        for j = 1:N+1
+            M[i,j] = Correlation(X[1][:,j], X[2][:,j])
+        end
+    end
+    return M
+end
+
+function PointsInCuboid(dx,xint,dy,yint,dz,zint)
+    vec = []
+    for x = xint[1]:dx:xint[2]
+        for y = yint[1]:dy:yint[2]
+            for z = zint[1]:dz:zint[2]
+                push!(vec,[x,y,z])
+            end
+        end
+    end
+    return vec
+end
