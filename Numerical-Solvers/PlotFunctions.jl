@@ -1,3 +1,4 @@
+
 function PlotNucleusPlot(solutions)
     p = scatter(legend=false)
     for X = solutions
@@ -30,4 +31,11 @@ function PlotTrajectoriesOneVariable(solutions, index, legend=false)
         plot!(p, X[index,:])
     end
     display(p)
+end
+
+function PlotPipPlot(M,Δt;title="Correlation plot",clim=(-1,1),cmap=:grays)
+    r,c = size(M)
+    y = [1:1:r]
+    x = [0:Δt:Δt*(c-1)]
+    heatmap(x,y,M,xlabel="time t", title=title,clim=clim,cmap=cmap,yaxis=false)
 end
