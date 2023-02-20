@@ -17,7 +17,11 @@ function LorenzSolutionFixedTimeStep(p, Δt, N, x₀, Solver)
 end
 
 function Correlation(x̄₁,x̄₂)
-    return sum(x̄₁.*x̄₂)/norm(x̄₁)/norm(x̄₂)
+    if x̄₁ == [0,0,0] && x̄₂== [0,0,0]
+        return 1.0
+    else
+        return sum(x̄₁.*x̄₂)/norm(x̄₁)/norm(x̄₂)
+    end
 end
 
 function CorrelationMatrix(p,Δt,N,initial_points,Solvers,step_per_Δt)
