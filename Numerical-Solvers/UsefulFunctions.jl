@@ -40,10 +40,21 @@ function CorrelationMatrix(p,Δt,N,initial_points,Solvers,step_per_Δt)
     return M
 end
 
-function PointsSolutions(p,Δt,N,initial_points,Solver)
+function CorrelationMatrix(M₁, M₂, num_init_points, N)
+    M = zeros(num_init_points,N)
+    for i = 1:num_init_points
+        for j = 1:N
+            M[i,j] = Correlation(M₁[i][:,j],M₂[i][:,j])
+        end
+    end
+    return M
+end
+
+function PointsSolutions(p,Δt,N::Int64,initial_points,Solver, steps_per_Δt::Int64)
     solutions = []
-    for x₀ = initial_points
-        X = LorenzSolutionFixedTimeStep(p, Δt, N, x₀, Solver)
+    for i = eachindex(initial_points)
+        x₀ = initial_points[i]
+        X = LorenzSolutionFixedTimeStep(p, Δt/steps_per_Δt, N*steps_per_Δt, x₀, Solver)[:,1:steps_per_Δt:end]
         push!(solutions, X)
     end
     return solutions
