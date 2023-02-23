@@ -7,7 +7,7 @@ function EulerCromer(p,x̄ₙ,Δt)
     ẋₙ = θ * (yₙ - xₙ)
     xₙ₊₁ = xₙ + ẋₙ * Δt
     
-    ẏₙ = xₙ₊₁ * (μ - zₙ) - yₙ
+    ẏₙ = xₙ * (μ - zₙ) - yₙ
     yₙ₊₁ =  yₙ + ẏₙ * Δt
 
     żₙ = xₙ₊₁ * yₙ₊₁ - β * zₙ
