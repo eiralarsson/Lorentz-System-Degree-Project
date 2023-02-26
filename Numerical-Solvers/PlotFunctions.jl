@@ -12,7 +12,7 @@ end
 function PlotTrajectories(solutions)
     p = plot(legend=false)
     for X = solutions
-        plot!(p, X[1,:], X[2,:], X[3,:]) #, color=:blue) 
+        plot!(p, X[1,:], X[2,:], X[3,:]) 
     end
     display(p)
 end
@@ -20,7 +20,7 @@ end
 function PlotTrajectoriesInterpolated(solutions)
     p = plot(legend=false)
     for X = solutions
-        plot!(p, X, vars=(1,2,3)) #, color=:blue) 
+        plot!(p, X, vars=(1,2,3))
     end
     display(p)
 end
@@ -33,7 +33,7 @@ function PlotTrajectoriesOneVariable(solutions, index, legend=false)
     display(p)
 end
 
-function PlotPipPlot(M,Δt;title="Correlation plot",clim=(-1,1),cmap=:grays, yaxis=false)
+function PlotPipPlot(M,Δt;title="Correlation plot",clim=(-1,1),cmap=:grayC, yaxis=false)
     r,c = size(M)
     y = [1:1:r]
     x = [0:Δt:Δt*(c-1)]
