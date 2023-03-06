@@ -17,6 +17,7 @@ function LorenzSolutionFixedTimeStep(p, Δt, N, x₀, Solver)
 end
 
 function Correlation(x̄₁,x̄₂)
+    # Returns the correlation between two vectors
     if x̄₁ == [0,0,0] && x̄₂== [0,0,0]
         return 1.0
     else
