@@ -24,7 +24,7 @@ function DTM(p,x̄,Δt, terms=10::Int64)
     return x̄
 end
 
-function DTM5(p,x̄,Δt, terms=5::Int64)
+function DTM3(p,x̄,Δt, terms=3::Int64)
     θ=p[1]; μ=p[2]; β=p[3]
     C = zeros(3, terms)
     C[1,1] = x̄[1]; C[2,1] = x̄[2]; C[3,1] = x̄[3]
