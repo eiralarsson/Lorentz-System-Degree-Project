@@ -60,3 +60,8 @@ function PointsSolutions(p,Δt,N::Int64,initial_points,Solver, steps_per_Δt::In
     end
     return solutions
 end
+
+function EnergyFunction(x)
+    # a very simple energy function
+    return sum(x.^2) 
+end
