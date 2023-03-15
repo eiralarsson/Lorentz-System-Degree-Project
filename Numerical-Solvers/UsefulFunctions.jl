@@ -54,7 +54,7 @@ function CorrelationMatrixWorse(M₁, M₂, num_init_points, N)
 end
 
 
-function CorrelationMatrix(M₁, M₂, num_init_points, N)
+function CorrelationMatrixBetter(M₁, M₂, num_init_points, N)
     M = zeros(num_init_points,N+1)
     for i = 1:num_init_points
         for j = 1:N+1
@@ -74,7 +74,7 @@ function PointsSolutionsWorse(p,Δt,N::Int64,initial_points,Solver, steps_per_Δ
     return solutions
 end
 
-function PointsSolutions(p,Δt,N::Int64,initial_points,Solver, steps_per_Δt::Int64)
+function PointsSolutionsBetter(p,Δt,N::Int64,initial_points,Solver, steps_per_Δt::Int64)
     solutions = zeros(3*length(initial_points), N+1)
     for i = eachindex(initial_points)
         x₀ = initial_points[i]
