@@ -21,7 +21,7 @@ function PointsOnLine(x̄₀, v̄, Iₛ , Δs)
 end
 
 # Center has to be a column vector
-function PointsOnSphere(nr_of_dots, r, center=[0,0,0]')
+function PointsOnSphere(nr_of_dots, r, center=[0 0 0])
     dots = zeros(3, nr_of_dots)
     for i=1:nr_of_dots
         dot = rand(-1.0:0.001:1.0,(1,3))

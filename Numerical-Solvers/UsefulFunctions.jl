@@ -20,8 +20,6 @@ function Correlation(x̄₁,x̄₂)
     # Returns the correlation between two vectors
     if x̄₁ == [0,0,0] && x̄₂== [0,0,0]
         return 1.0
-    elseif x̄₁ == [0 0 0] && x̄₂== [0 0 0]
-        return 1.0
     else
         return sum(x̄₁.*x̄₂)/norm(x̄₁)/norm(x̄₂)
     end
@@ -43,7 +41,7 @@ function CorrelationMatrix(p,Δt,N,initial_points,Solvers,step_per_Δt)
     return M
 end
 
-function CorrelationMatrixWorse(M₁, M₂, num_init_points, N)
+function CorrelationMatrix(M₁, M₂, num_init_points, N)
     M = zeros(num_init_points,N)
     for i = 1:num_init_points
         for j = 1:N
@@ -54,32 +52,22 @@ function CorrelationMatrixWorse(M₁, M₂, num_init_points, N)
 end
 
 
-function CorrelationMatrixBetter(M₁, M₂, num_init_points, N)
-    M = zeros(num_init_points,N+1)
+function CorrelationMatrix(M₁, M₂, num_init_points, N)
+    M = zeros(num_init_points,N)
     for i = 1:num_init_points
-        for j = 1:N+1
-            M[i,j] = Correlation(M₁[3*(i-1)+1:3*i,j], M₂[3*(i-1)+1:3*i,j])
+        for j = 1:N
+            M[i,j] = Correlation(M₁[j, 3*(N-1):3*N], M₂[j, 3*(N-1)+1:3*N])
         end
     end
     return M
 end
 
-function PointsSolutionsWorse(p,Δt,N::Int64,initial_points,Solver, steps_per_Δt::Int64)
+function PointsSolutions(p,Δt,N::Int64,initial_points,Solver, steps_per_Δt::Int64)
     solutions = []
     for i = eachindex(initial_points)
         x₀ = initial_points[i]
         X = LorenzSolutionFixedTimeStep(p, Δt/steps_per_Δt, N*steps_per_Δt, x₀, Solver)[:,1:steps_per_Δt:end]
         push!(solutions, X)
-    end
-    return solutions
-end
-
-function PointsSolutionsBetter(p,Δt,N::Int64,initial_points,Solver, steps_per_Δt::Int64)
-    solutions = zeros(3*length(initial_points), N+1)
-    for i = eachindex(initial_points)
-        x₀ = initial_points[i]
-        X = LorenzSolutionFixedTimeStep(p, Δt/steps_per_Δt, N*steps_per_Δt, x₀, Solver)[:,1:steps_per_Δt:end]
-        solutions[3*(i-1)+1:3*i,:] = X
     end
     return solutions
 end
