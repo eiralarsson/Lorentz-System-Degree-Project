@@ -51,6 +51,17 @@ function CorrelationMatrix(M₁, M₂, num_init_points, N)
     return M
 end
 
+
+function CorrelationMatrix(M₁, M₂, num_init_points, N)
+    M = zeros(num_init_points,N)
+    for i = 1:num_init_points
+        for j = 1:N
+            M[i,j] = Correlation(M₁[j, 3*(N-1):3*N], M₂[j, 3*(N-1)+1:3*N])
+        end
+    end
+    return M
+end
+
 function PointsSolutions(p,Δt,N::Int64,initial_points,Solver, steps_per_Δt::Int64)
     solutions = []
     for i = eachindex(initial_points)
