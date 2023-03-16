@@ -20,27 +20,27 @@ function Correlation(x̄₁,x̄₂)
     # Returns the correlation between two vectors
     if x̄₁ == [0,0,0] && x̄₂== [0,0,0]
         return 1.0
-    elseif x̄₁ == [0 0 0] && x̄₂== [0 0 0]
-        return 1.0
     else
         return sum(x̄₁.*x̄₂)/norm(x̄₁)/norm(x̄₂)
     end
 end
 
-function CorrelationMatrix(M₁, M₂, num_init_points, N)
-    M = zeros(num_init_points,N+1)
-    for i = 1:num_init_points
-        for j = 1:N+1
+function CorrelationMatrix(M₁, M₂)
+    r = Integer(size(M₁)[1]/3)
+    c = size(M₁)[2]
+    M = zeros(r,c)
+    for i = 1:r
+        for j = 1:c
             M[i,j] = Correlation(M₁[3*(i-1)+1:3*i,j], M₂[3*(i-1)+1:3*i,j])
         end
     end
     return M
 end
 
-function PointsSolutions(p,Δt,N::Int64,initial_points,Solver, steps_per_Δt::Int64)
-    solutions = zeros(3*length(initial_points), N+1)
-    for i = eachindex(initial_points)
-        x₀ = initial_points[i]
+function PointsSolutions(p,Δt,N::Int64,initial_points,Solver; steps_per_Δt=1::Int64)
+    solutions = zeros(3*size(initial_points)[2], N+1)
+    for i = 1:size(initial_points)[2]
+        x₀ = initial_points[:,i]
         X = LorenzSolutionFixedTimeStep(p, Δt/steps_per_Δt, N*steps_per_Δt, x₀, Solver)[:,1:steps_per_Δt:end]
         solutions[3*(i-1)+1:3*i,:] = X
     end
