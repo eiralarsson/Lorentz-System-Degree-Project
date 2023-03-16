@@ -37,6 +37,18 @@ function CorrelationMatrix(M₁, M₂)
     return M
 end
 
+function CorrelationMatrix_InitPos(M₁, X)
+    r = Integer(size(M₁)[1]/3)
+    c = size(M₁)[2]
+    M = zeros(r,c)
+    for i = 1:r
+        for j = 1:c
+            M[i,j] = Correlation(M₁[3*(i-1)+1:3*i,j], X[:,j])
+        end
+    end
+    return M
+end
+
 function PointSolutions(p,Δt,N::Int64,initial_points,Solver; steps_per_Δt=1::Int64)
     solutions = zeros(3*size(initial_points)[2], N+1)
     for i = 1:size(initial_points)[2]
