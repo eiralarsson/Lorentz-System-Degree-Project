@@ -37,7 +37,7 @@ function CorrelationMatrix(M₁, M₂)
     return M
 end
 
-function PointsSolutions(p,Δt,N::Int64,initial_points,Solver; steps_per_Δt=1::Int64)
+function PointSolutions(p,Δt,N::Int64,initial_points,Solver; steps_per_Δt=1::Int64)
     solutions = zeros(3*size(initial_points)[2], N+1)
     for i = 1:size(initial_points)[2]
         x₀ = initial_points[:,i]
