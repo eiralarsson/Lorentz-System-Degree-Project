@@ -37,5 +37,5 @@ function PlotPipPlot(M,Δt;title="Correlation plot",clim=(-1,1),cmap=:grayC, yax
     r,c = size(M)
     y = [1:1:r]
     x = [0:Δt:Δt*(c-1)]
-    heatmap(x,y,M,xlabel="time t", title=title,clim=clim,cmap=cmap,yaxis=yaxis, dpi=300)
+    heatmap(x,y,M,xlabel="time t", title=title,clim=clim,cmap=cmap,yaxis=yaxis, dpi=500)
 end
