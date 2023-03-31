@@ -1,36 +1,32 @@
 
-function PlotNucleusPlot(solutions)
-    p = scatter(legend=false)
+function PlotNucleusPlot(p,solutions)
     for X = solutions
         scatter!(p, X[1,[1]], X[2,[1]], X[3,[1]], color=:blue)
         scatter!(p, X[1,[N]], X[2,[N]], X[3,[N]], color=:red)
         plot!(p, X[1,[1,N]], X[2,[1,N]], X[3,[1,N]], color=:black)
     end
-    display(p)
+    return p
 end
 
-function PlotTrajectories(solutions)
-    p = plot(legend=false)
+function PlotTrajectories(p,solutions; label = "")
     for X = solutions
-        plot!(p, X[1,:], X[2,:], X[3,:]) 
+        plot!(p, X[1,:], X[2,:], X[3,:], label=label) 
     end
-    display(p)
+    return p
 end
 
-function PlotTrajectoriesInterpolated(solutions)
-    p = plot(legend=false)
+function PlotTrajectoriesInterpolated(p,solutions)
     for X = solutions
         plot!(p, X, vars=(1,2,3))
     end
-    display(p)
+    return p
 end
 
-function PlotTrajectoriesOneVariable(solutions, index, legend=false)
-    p = plot(legend=legend)
+function PlotTrajectoriesOneVariable(p,solutions, index)
     for X = solutions
         plot!(p, X[index,:])
     end
-    display(p)
+    return p
 end
 
 function PlotPipPlot(M,Δt;title="Correlation plot",clim=(-1,1),cmap=:grayC, yaxis=false)
