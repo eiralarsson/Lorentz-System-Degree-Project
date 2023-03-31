@@ -8,9 +8,9 @@ function PlotNucleusPlot(p,solutions)
     return p
 end
 
-function PlotTrajectories(p,solutions)
+function PlotTrajectories(p,solutions; label = "")
     for X = solutions
-        plot!(p, X[1,:], X[2,:], X[3,:]) 
+        plot!(p, X[1,:], X[2,:], X[3,:], label=label) 
     end
     return p
 end
