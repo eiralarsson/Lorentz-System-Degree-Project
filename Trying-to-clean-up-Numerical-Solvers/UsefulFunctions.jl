@@ -2,7 +2,7 @@ using LinearAlgebra
 
 function lorenz_solution_fixed_timestep(p, Δt, N, x₀, Solver)
     if typeof(Solver) == UnionAll
-        prob = ODEProblem(LorentzSystem,x₀,(0,Δt*(N-1)),p);
+        prob = ODEProblem(LorentzSystem,x₀,(0,Δt*N),p);
         X = solve(prob, Solver(), adaptive=false, dt=Δt);
         return X
     else
