@@ -1,7 +1,7 @@
-function LorentzSystem(x̄,p,t=1)
-    # Lorentz system
+function LorenzSystem(x̄,p,t=1)
+    # Lorenz system
     # Returns the derivative of the state vector x̄
-    θ=p[1]; μ=p[2]; β=p[3]
+    θ, μ, β = p
     x=x̄[1]; y=x̄[2]; z=x̄[3]
     return [θ*(y-x); 
             x*(μ-z)-y;

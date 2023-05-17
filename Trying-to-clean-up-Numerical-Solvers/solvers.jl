@@ -1,5 +1,5 @@
 using LinearAlgebra
-include("lorentz_system.jl")
+include("lorenz_system.jl")
 
 
 function DTM(p,x̄,Δt, terms=10::Int64)
@@ -24,7 +24,7 @@ function DTM(p,x̄,Δt, terms=10::Int64)
 end
 
 
-function EulerForward(p,x̄,Δt,ẋ=LorentzSystem::Function)
+function EulerForward(p,x̄,Δt,ẋ=LorenzSystem::Function)
     x̄ = x̄ + Δt*ẋ(x̄,p)
     return x̄
 end
@@ -49,7 +49,7 @@ function EulerCromer(p,x̄ₙ,Δt)
 end
 
 
-function RK4(p, xₙ, Δt,ẋ=LorentzSystem::Function)
+function RK4(p, xₙ, Δt,ẋ=LorenzSystem::Function)
 
     k₁ = ẋ(xₙ,p)
     k₂ = ẋ(xₙ + 0.5*Δt*k₁,p)

@@ -2,7 +2,7 @@ using LinearAlgebra
 
 function lorenz_solution_fixed_timestep(p, Δt, N, x₀, Solver)
     if typeof(Solver) == UnionAll
-        prob = ODEProblem(LorentzSystem,x₀,(0,Δt*N),p);
+        prob = ODEProblem(LorenzSystem,x₀,(0,Δt*(N-1)),p);
         X = solve(prob, Solver(), adaptive=false, dt=Δt);
         return X
     else
@@ -42,12 +42,21 @@ function points_solutions_matrix(p,Δt,N::Int64,initial_points,solver; steps_per
     for i = 1:size(initial_points)[2]
         x₀ = initial_points[:,i]
         X = lorenz_solution_fixed_timestep(p, Δt/steps_per_Δt, N*steps_per_Δt, x₀, solver)[:,1:steps_per_Δt:end]
-        solutions[3*(i-1)+1:3*i,:] = X
+        r,c = size(X)
+        if c != N+1
+            solutions[3*(i-1)+1:3*i,:] = zeros(3,N+1)*NaN
+        else
+            solutions[3*(i-1)+1:3*i,1:c] = X
+        end
     end
     return solutions
 end
 
-function energy_function(x)
-    # a very simple energy function
-    return sum(x.^2) 
+function energy_of_solution(x)
+    r,c = size(x)
+    energy = zeros(1,c)
+    for i = 1:c
+        energy[i] = sum(init_cond[:,2].^2)
+    end
+    return energy
 end
