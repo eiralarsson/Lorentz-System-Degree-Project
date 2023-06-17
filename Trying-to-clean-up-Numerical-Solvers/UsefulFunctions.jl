@@ -60,3 +60,9 @@ function energy_of_solution(x)
     end
     return energy
 end
+
+function fixpoints(p)
+    θ,μ,β = p
+    val = sqrt(β*(μ-1))
+    return [[val val μ-1],[-val -val μ-1]]
+end
